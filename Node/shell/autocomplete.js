@@ -1,5 +1,5 @@
 var fs = require('fs'),
-    builtin = require('shell/builtin/builtin');
+    builtin = require('./builtin/builtin');
 
 /*
 
@@ -118,7 +118,7 @@ exports.autocomplete.prototype = {
 
     // Trailing slashes.
     function trail(path) {
-      if (!(/\/$/(path))) {
+      if (!(/\/$/.test(path))) {
         path += '/';
       }
       return path;

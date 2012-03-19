@@ -1,12 +1,12 @@
 var fs = require('fs'),
-    view = require('view/view'),
-    composePath = require('misc').composePath,
-    whenDone = require('misc').whenDone,
+    view = require('../../view/view'),
+    composePath = require('../../misc').composePath,
+    whenDone = require('../../misc').whenDone,
     EventEmitter = require('events').EventEmitter,
-    async = require('misc').async,
-    meta = require('shell/meta'),
-    expandPath = require('misc').expandPath,
-    parseArgs = require('misc').parseArgs;
+    async = require('../../misc').async,
+    meta = require('../meta'),
+    expandPath = require('../../misc').expandPath,
+    parseArgs = require('../../misc').parseArgs;
 
 exports.main = function (tokens, pipes, exit) {
   
@@ -31,7 +31,7 @@ exports.main = function (tokens, pipes, exit) {
     
     // Format data.
     var data = JSON.stringify(output);
-    process.stderr.write(data);
+    //process.stderr.write(data);
     
     // Prepare headers.
     var headers = new meta.headers();

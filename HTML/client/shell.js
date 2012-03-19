@@ -16,7 +16,6 @@ tc.shell = function (client, environment, success) {
   
   this.frames = {};
   this.views = {};
-
   this.query('session.open.shell', { }, function (message) {
     that.id = message.args.session;
 

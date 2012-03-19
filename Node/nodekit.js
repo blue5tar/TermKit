@@ -2,17 +2,17 @@
 var termkit = {
   version: 1,
 };
-require.paths.unshift(__dirname);
-require.paths.unshift(__dirname+'/../Shared');
+//require.paths.unshift(__dirname);
+//require.paths.unshift(__dirname+'/../Shared');
 
 // Load requirements.
 var http = require('http'),  
     io = require('socket.io')
-    router = require("router"),
+    router = require("./router"),
     connect = require('connect');
 
 // Load config file.
-var config = require('config').getConfig();
+var config = require('./config').getConfig();
 
 // Set up http server.
 var server = connect.createServer(

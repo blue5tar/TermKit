@@ -1,6 +1,6 @@
-var shell = require("shell/shell");
-var returnMeta = require('misc').returnMeta;
-var protocol = require('protocol');
+var shell = require("./shell/shell");
+var returnMeta = require('./misc').returnMeta;
+var protocol = require('../Shared/protocol');
 
 /**
  * Processes incoming messages on a connection, routes them to active sessions.
@@ -21,7 +21,7 @@ exports.router.prototype = {
     var that = this,
         session = message.session && this.getSession(message.session);
         returned = false,
-    
+
       // Define convenient answer callback.
         exit = function (success, object, meta) {
           if (!returned) {
@@ -40,7 +40,7 @@ exports.router.prototype = {
       handler.call(this, session, message.query, message.args || {}, exit);
       return;
     }
-    
+
     // Else forward to session.
     session.dispatch(message.query, message.method, message.args || {}, exit);
     

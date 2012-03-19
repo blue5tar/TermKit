@@ -1,12 +1,12 @@
 var EventEmitter = require("events").EventEmitter,
-    outputFormatter = require('shell/formatter').formatter;
+    outputFormatter = require('./formatter').formatter;
     spawn = require('child_process').spawn,
-    view = require('view/view'),
-    meta = require('shell/meta'),
-    builtin = require('shell/builtin/builtin'),
-    async = require('misc').async,
-    whenDone = require('misc').whenDone,
-    returnObject = require('misc').returnObject,
+    view = require('../view/view'),
+    meta = require('./meta'),
+    builtin = require('./builtin/builtin'),
+    async = require('../misc').async,
+    whenDone = require('../misc').whenDone,
+    returnObject = require('../misc').returnObject,
 
     outputViewCounter = 1;
 
@@ -167,6 +167,7 @@ exports.commandUnit.builtinCommand = function (command, emitter, invoke, exit) {
 exports.commandUnit.builtinCommand.prototype = new exports.commandUnit();
 
 exports.commandUnit.builtinCommand.prototype.spawn = function () {
+
   var that = this,
       prefix = this.override || this.command[0];
 
@@ -177,7 +178,7 @@ exports.commandUnit.builtinCommand.prototype.spawn = function () {
 
   // Load handler.
   try {
-    this.handler = require('builtin/' + prefix);
+    this.handler = require('./builtin/' + prefix);
   } catch (e) {
     throw "Error loading handler '"+ prefix +"': " + e;
   }

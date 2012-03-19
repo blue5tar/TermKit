@@ -3,7 +3,7 @@ var fs = require('fs'), net = require('net');
 var spawn = require('child_process').spawn,
     exec = require('child_process').exec;
 
-var config = require('config').getConfig();
+var config = require('../config').getConfig();
 
 exports.shell = function (args, router) {
 
@@ -15,7 +15,7 @@ exports.shell = function (args, router) {
   
   // Extract location of source.
   var p, path = process.argv[1].split('/');
-  path[path.length - 1] = './shell/worker.js';
+  path[path.length - 1] = 'shell/worker.js';
   path = path.join('/');
   
   // Determine user identity.
@@ -79,16 +79,13 @@ exports.shell.prototype = {
       // Cut off chunk.
       var chunk = this.buffer.split("\u0000").shift();
       this.buffer = this.buffer.substring(chunk.length + 1);
-
       // Parse message.
       var message = JSON.parse(chunk);
-
       // Intercept config changes.
       if (message.method == 'shell.config') {
         config.replace(message.args);
         return;
       }
-
       // Lock message to this session and forward.
       message.session = this.id;
       this.router.forward(message);

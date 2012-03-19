@@ -14,9 +14,9 @@
   },
   "bin": "Node/nodekit.js",
   "dependencies": {
-    "connect": "1.2",
-    "socket.io":"0.6",
-    "mime":"1.2"
+    "connect": "latest",
+    "socket.io":"latest",
+    "mime":"latest"
   },
   "devDependencies": {}
 }

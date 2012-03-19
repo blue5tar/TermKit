@@ -1,8 +1,8 @@
 var fs = require('fs'),
-    view = require('view/view'),
-    whenDone = require('misc').whenDone,
-    meta = require('shell/meta'),
-    expandPath = require('misc').expandPath;
+    view = require('../../view/view'),
+    whenDone = require('../../misc').whenDone,
+    meta = require('../meta'),
+    expandPath = require('../../misc').expandPath;
 
 exports.main = function (tokens, pipes, exit) {
   var out = new view.bridge(pipes.viewOut);

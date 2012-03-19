@@ -1,14 +1,14 @@
 var fs = require('fs'),
-    meta = require('shell/meta'),
-    view = require('view/view'),
-    asyncCallback = require('misc').asyncCallback;
-    async = require('misc').async,
-    extend = require('misc').extend,
-    JSONPretty = require('misc').JSONPretty,
-    composePath = require('misc').composePath,
-    objectKeys = require('misc').objectKeys,
-    reader = require('reader'),
-    escapeBinary = require('misc').escapeBinary;
+    meta = require('./meta'),
+    view = require('../view/view'),
+    asyncCallback = require('../misc').asyncCallback;
+    async = require('../misc').async,
+    extend = require('../misc').extend,
+    JSONPretty = require('../misc').JSONPretty,
+    composePath = require('../misc').composePath,
+    objectKeys = require('../misc').objectKeys,
+    reader = require('./reader'),
+    escapeBinary = require('../misc').escapeBinary;
 
 /**
  * Error logger.
@@ -133,7 +133,7 @@ exports.plugins.text.prototype = extend(new exports.plugin(), {
 
 exports.plugins.text.supports = function (headers) {
   var type = headers.get('Content-Type');
-  return !!(/^text\//(type)) * 1;
+  return !!(/^text\//.test(type)) * 1;
 }
 
 /**
@@ -217,7 +217,7 @@ exports.plugins.image.prototype = extend(new exports.plugin(), {
 
 exports.plugins.image.supports = function (headers) {
   var type = headers.get('Content-Type');
-  return !!(/^image\//(type)) * 1;
+  return !!(/^image\//.test(type)) * 1;
 };
 
 /**
@@ -304,7 +304,7 @@ exports.plugins.files.prototype = extend(new exports.plugin(), {
 exports.plugins.files.supports = function (headers) {
   var type = headers.get('Content-Type'),
       schema = headers.get('Content-Type', 'schema');
-  return !!(/^application\/json$/(type) && (schema == 'termkit.files')) * 3;
+  return !!(/^application\/json$/.test(type) && (schema == 'termkit.files')) * 3;
 };
 
 /**
@@ -331,6 +331,6 @@ exports.plugins.binary.prototype = extend(new exports.plugin(), {
 
 exports.plugins.binary.supports = function (headers) {
   var type = headers.get('Content-Type');
-  return !!(/^application\/octet-stream/(type)) * 1;
+  return !!(/^application\/octet-stream/.test(type)) * 1;
 }
 
