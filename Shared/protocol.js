@@ -39,13 +39,15 @@ exports.protocol.prototype = {
   },
   
   process: function (message) {
-
     // Version check.
     if (!this.agreed) {
+      
       if (message.termkit == this.version) {
+        
         this.agreed = true;
       }
       else {
+        
         this.connection.disconnect();
       }
       return;
@@ -70,7 +72,6 @@ exports.protocol.prototype = {
   query: function (method, args, meta, callback) {
     meta = meta || {};
     meta.query = this.counter++;
-    
     this.callbacks[meta.query] = callback;
     this.notify(method, args, meta);
   },
@@ -91,7 +92,6 @@ exports.protocol.prototype = {
     if (args) {
       meta.args = args;
     }
-
     this.send(meta);
   },
   
@@ -104,12 +104,14 @@ exports.protocol.prototype = {
         out.push(message);
         console.log.apply(console, out);
       }
-      this.connection.send(message);
+      //this.connection.send(message);
+      this.connection.emit('message', message);
     }
   },
   
   receive: function (message) {
     if (typeof message == 'object') {
+      
       if (debug) {
         var out = ['receiving'];
         message.method && out.push(message.method);
